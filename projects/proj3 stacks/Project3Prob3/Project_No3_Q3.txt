@@ -1,0 +1,101 @@
+#include <string>
+#include "stdafx.h"
+#include <iostream>
+
+using namespace std;
+
+class STACK
+{
+private:
+	char a[80];
+	int counter;
+
+public:
+	void clearStack()
+	{ 
+		counter = 0;
+	}  // End clearStack
+
+	bool emptyStack()
+	{ 
+		return (counter == 0) ? true : false;
+	}  // End clearStack
+
+	bool fullStack()
+	{ 
+		return (counter == 80) ? true : false; 
+	}  // End fullStack
+
+	void pushStack(int x)
+	{ 
+		a[counter] = x;
+		counter++;
+	}  // End pushStack
+
+	char popStack()
+	{
+		counter--;
+		return a[counter];
+	}  // End popStack
+};  // End class STACK
+
+bool isUpper(char x)
+{
+	return (isupper(x)) ? true : false;
+}  // End isUpper
+
+bool isLower(char x)
+{
+	return (islower(x)) ? true : false;
+}  // End isLower
+
+bool isVowel(char x)
+{
+	x = toupper(x);
+	return (x == 'A' || x == 'E' || x == 'I' || x == 'O' || x == 'U') ? true : false;
+}  // End isVowel
+
+int main()
+{
+	STACK UPP, LOW, VOW;
+
+	UPP.clearStack();
+	LOW.clearStack();
+	VOW.clearStack();
+
+	char c;
+	int x;
+
+	cout << "Enter a sentence: ";
+
+	while(cin.get(c), c != '\n')
+	{
+		if (isUpper(c))
+			UPP.pushStack(c);
+		if (isLower(c))
+			LOW.pushStack(c);
+		if (isVowel(c))
+			VOW.pushStack(c);
+	}  // End while loop
+
+	cout << endl;
+	cout << "Uppercase letters: ";
+
+	while (!UPP.emptyStack())
+		cout << UPP.popStack();
+
+	cout << endl;
+	cout << "Lowercase letters: ";
+
+	while (!LOW.emptyStack())
+		cout << LOW.popStack() << " ";
+	
+	cout << endl;
+	cout << "Vowels: ";
+
+	while (!VOW.emptyStack())
+		cout << VOW.popStack() << " ";
+
+	cout << endl;
+    return 0;
+}  // End main
